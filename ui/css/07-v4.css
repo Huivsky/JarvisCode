@@ -1,0 +1,337 @@
+/* ── 4.0: подключение, мышление, перенос чатов, хранилище ── */
+
+/* карточка «Подключите Jarvis Code к Notion AI» на главной */
+.setup-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  border-radius: var(--r-lg, 14px);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--accent-softer);
+  text-align: left;
+  animation: fade-up var(--t-slow) var(--ease-out) both;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+.setup-card:hover {
+  background: var(--surface-2);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+}
+.setup-card .grow {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.setup-card b {
+  font-weight: 600;
+}
+
+/* предупреждение в боковой панели (хранилище недоступно) */
+.sb-update.warn {
+  background: var(--warn-soft);
+}
+.sb-update.warn svg,
+.sb-update.warn b {
+  color: var(--warn);
+}
+.sb-update.warn:hover {
+  background: color-mix(in srgb, var(--warn) 22%, transparent);
+}
+
+/* мышление: четыре столбика */
+.effort-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 13px;
+  flex: none;
+}
+.effort-bars i {
+  display: block;
+  width: 3px;
+  border-radius: 1px;
+  background: color-mix(in srgb, currentColor 28%, transparent);
+  transition: background-color var(--t) var(--ease);
+}
+.effort-bars i.on {
+  background: var(--accent);
+}
+.effort-btn .relay-dot {
+  margin-right: 1px;
+}
+.menu .effort-bars {
+  color: var(--muted);
+}
+
+/* ошибка с «Повторить» */
+.error-box .error-text {
+  flex: 1;
+  min-width: 0;
+}
+.error-box .btn {
+  flex: none;
+  margin: -3px -4px -3px 0;
+}
+
+/* перенесённая из Notion переписка */
+.imported-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 10px 0 14px;
+  border-bottom: 1px dashed var(--border);
+}
+.imported-head {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 7px;
+  height: 28px;
+  padding: 0 10px 0 8px;
+  border-radius: 999px;
+  background: var(--hover);
+  color: var(--text-2, var(--muted));
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: background-color var(--t-fast) var(--ease);
+}
+.imported-head:hover {
+  background: color-mix(in srgb, var(--accent) 12%, var(--hover));
+  color: var(--text);
+}
+.imported-head .muted {
+  margin-left: 4px;
+}
+.imported-items {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.imported-block:not(.open) .imported-items {
+  opacity: 0.85;
+}
+
+/* модальное окно переноса */
+.import-modal .import-tabs {
+  align-self: flex-start;
+  margin: 4px 0 14px;
+}
+.import-way {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.import-warn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: var(--warn-soft);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.import-warn svg {
+  flex: none;
+  color: var(--warn);
+}
+.import-warn span {
+  flex: 1;
+}
+.import-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+.import-steps li::marker {
+  color: var(--accent);
+  font-weight: 600;
+}
+.import-steps li > b {
+  font-weight: 600;
+}
+.import-steps .import-actions,
+.import-steps li > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.import-done {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: var(--ok-soft);
+  color: var(--ok);
+  font-weight: 500;
+}
+.import-wait {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.import-text {
+  align-items: stretch;
+  padding: 8px 10px 8px 12px;
+}
+.field.import-text textarea {
+  height: 240px;
+  resize: vertical;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.import-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.import-grow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* хранилище */
+.storage-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: var(--warn-soft);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.storage-warn svg {
+  flex: none;
+  margin-top: 1px;
+  color: var(--warn);
+}
+.storage-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.storage-ico {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-md);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.storage-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+.storage-path {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.storage-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+.storage-parts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0 16px;
+}
+.storage-part {
+  display: grid;
+  grid-template-columns: 200px 1fr 74px;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+.storage-part > span:last-child {
+  text-align: right;
+}
+.storage-bar {
+  position: relative;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--hover);
+}
+.storage-bar span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--accent) 75%, transparent);
+  transition: width 400ms var(--ease);
+}
+.storage-move,
+.storage-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: var(--surface);
+}
+.storage-confirm p {
+  margin: 0;
+}
+.storage-confirm .set-actions {
+  margin-top: 4px;
+}
+.storage-move + p,
+.storage-confirm + p {
+  margin-top: 12px;
+}
+
+/* 4.0.2: автоматическая загрузка ngrok */
+.ngrok-dl {
+  margin-top: 8px;
+}
+.ngrok-dl .update-bar {
+  margin-top: 6px;
+}
+.update-bar.indeterminate span {
+  animation: ngrok-dl-slide 1.2s var(--ease) infinite;
+}
+@keyframes ngrok-dl-slide {
+  from {
+    left: -30%;
+  }
+  to {
+    left: 100%;
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "jarvis-code",
+  "version": "4.2.0-beta.2",
+  "private": true,
+  "type": "module",
+  "description": "Jarvis Code — десктоп-клиент агента Notion с доступом к ПК",
+  "scripts": {
+    "build": "bun scripts/build.ts",
+    "dev": "bun scripts/build.ts --dev",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit -p .",
+    "test": "bun scripts/build.ts && bun test/smoke.ts && bun test/context.ts && bun test/security.ts && bun test/files.ts && bun test/update.ts && bun test/desktop.ts && bun test/commands.ts && bun test/ngrok.ts && bun test/regression.ts && bun test/control-center.ts && bun test/session-integration.ts && bun test/harness.ts",
+    "build:exe": "bun scripts/build.ts --exe",
+    "release": "bun scripts/build.ts --release",
+    "shots": "bun test/preview.ts > /tmp/preview.json & sleep 6 && node test/shots.mjs /tmp/preview.json shots",
+    "test:regression": "bun test/regression.ts",
+    "test:harness": "bun scripts/build.ts && bun test/harness.ts",
+    "test:windows": "bun scripts/build.ts && bun test/windows.ts"
+  },
+  "dependencies": {
+    "marked": "^15.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "playwright-core": "^1.50.0",
+    "resedit": "^2.0.0",
+    "typescript": "^5.6.0"
+  }
+}
